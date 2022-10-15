@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//reference: https://www.youtube.com/watch?v=bTMyqDH6cUA
+
 #define ll long long
 #define pii pair<int, int>
 #define pll pair<long long, long long>
@@ -39,28 +41,6 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-bool helper(int n, ll totalSum, int i, ll curr, bool* out, int m=0){
-	if (i>n){
-		if ((totalSum*1LL)==(curr*2LL)){
-		cout<<"YES"<<"\n"<<m<<"\n";
-		for (int i=1; i<=n; i++)	if (out[i])	cout<<i<<" ";
-		cout<<"\n";
-
-		//print the other set
-		cout<<(n-m)<<"\n";
-		for (int i=1; i<=n; i++)	if (!out[i])	cout<<i<<" ";
-		cout<<"\n";
-		return true;
-		}
-		return false;
-	}
-	if (helper(n,totalSum,i+1,curr,out,m))	return true;
-	out[i]=true;
-	bool val=helper(n,totalSum,i+1,curr+i,out,m+1);
-	out[i]=false;
-	return val;
-}
-
 int main()
 {
 	ios::sync_with_stdio(0);
@@ -70,13 +50,21 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 	//write the code 
-	int n;	cin>>n;
-	ll sum=(1LL*n*(n+1))/2;
-	cout<<sum<<endl;
-	if (sum%2!=0)	cout<<"NO\n";
-	else{	
-		bool out[n+1]={false};
-		helper(n,sum,1,0,out);
-	}
-	return 0;
+	int n; cin >> n;
+    if ((1LL*n * (n+1)) % 4 == 0)
+    {
+        cout << "YES\n";
+        set<ll> a, b;
+        for (int i = 1; i <= n; ++i) a.insert(i);
+        ll x = (1LL*n*(n+1))/4;
+        
+        for (int i = n; i >= 1; --i)
+            if (i <= x) { x -= i; a.erase(i); b.insert(i); }
+        cout << a.size() << '\n';
+        for (auto x : a) cout << x << " "; cout << '\n';
+        cout << b.size() << '\n';
+        for (auto x : b) cout << x << " "; cout << '\n';
+    }
+    else cout << "NO\n";
+    return 0;
 }
