@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//reference: https://www.youtube.com/watch?v=bTMyqDH6cUA
-
 #define ll long long
 #define pii pair<int, int>
 #define pll pair<long long, long long>
@@ -49,22 +47,10 @@ int main()
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 	#endif
-	//write the code 
-	int n; cin >> n;
-    if ((1LL*n * (n+1)) % 4 == 0)
-    {
-        cout << "YES\n";
-        set<ll> a, b;
-        for (int i = 1; i <= n; ++i) a.insert(i);
-        ll x = (1LL*n*(n+1))/4; //problem: don't forget to use 1LL at times
-        
-        for (int i = n; i >= 1; --i)
-            if (i <= x) { x -= i; a.erase(i); b.insert(i); }
-        cout << a.size() << '\n';
-        for (auto x : a) cout << x << " "; cout << '\n';
-        cout << b.size() << '\n';
-        for (auto x : b) cout << x << " "; cout << '\n';
-    }
-    else cout << "NO\n";
-    return 0;
+	//write the code
+	ll n;	cin>>n; 
+	for (int i=0; i<n; i++)
+		ans=(ans*2)%MOD;
+	cout<<ans<<"\n";
+	return 0;
 }
